@@ -65,6 +65,13 @@ class Interface
       elsif @cart.diler_score == @cart.player_score
         puts "Ничья"
       end
+      puts "Хотите начать новую игру?"
+      flag = gets.chomp
+      if flag == 'да'
+        Interface.run
+      else
+        abort
+      end
     else
       puts "Вы пропустили ход"
     end
