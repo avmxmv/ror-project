@@ -8,12 +8,7 @@ require_relative 'cart'
 
 
 class Interface
-  COMMANDS = {
-      '1' => 'create_player', '2' => 'player_score', '3' => 'play', '4' => 'add_station',
-      '5' => 'delete_station', '6' => 'new_train_speed', '7' => 'look_train_speed', '8' => 'stop_train',
-      '9' => 'route_for_train', '10' => 'main_forward', '11' => 'main_backward', '12' => 'print_station',
-      '13' => 'add_vagon', '14' => 'del_vagon', '15' => 'occupy_volume'
-  }.freeze
+  COMMANDS = {'1' => 'create_player', '2' => 'player_score', '3' => 'play'}.freeze
 
   def initialize
     @cart = nil
@@ -63,14 +58,17 @@ class Interface
     when 2
       if 21 >= @cart.player_score && @cart.player_score > @cart.diler_score
         puts "Вы выиграли"
+        @bank.player_balance += 20
       elsif 21 >= @cart.diler_score && @cart.diler_score > @cart.player_score
         puts "Вы проиграли"
+        @bank.diler_balance += 20
       elsif @cart.diler_score == @cart.player_score
         puts "Ничья"
       end
     else
       puts "Вы пропустили ход"
     end
+    diler
   end
 
   def diler
