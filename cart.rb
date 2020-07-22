@@ -14,7 +14,7 @@ class Cart
     @player_carts.each do |el|
       summ += CARTS.index(el) % 10 + 1
     end
-    puts summ
+    summ
   end
 
   def diler_score
@@ -22,7 +22,7 @@ class Cart
     @diler_carts.each do |el|
       summ += CARTS.index(el) % 10 + 1
     end
-    puts summ
+    summ
   end
 
   def add_cart
