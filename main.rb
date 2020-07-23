@@ -22,6 +22,8 @@ class Interface
     name = gets.chomp
     @player = Player.new(name)
     puts "Добро пожаловать #{@player.name}"
+    puts "Ваш баланс(из текущего будет вычтена плата за игру)"
+    puts @bank.player_balance
     loop do
       help
       if @cart.nil?
@@ -30,7 +32,9 @@ class Interface
         @bank.player_balance -= 10
       end
       puts "Ваше кол-во очков:"
-      @cart.player_score
+      puts @cart.player_score
+      puts "Ваши карты:"
+      puts @cart.player_carts
       puts 'Выберите пункт'
       choice = gets.chomp
       send(COMMANDS[choice])
@@ -76,6 +80,9 @@ class Interface
   def diler
     if @cart.diler_score.to_i < 17
       @cart.d_add_cart
+      puts "Дилер взял карту"
+    else
+      puts "Дилер пропустил ход"
     end
   end
 
