@@ -1,4 +1,5 @@
 class Interface
+  attr_reader :game
   COMMANDS = { '1' => 'play' }.freeze
 
   def initialize
@@ -21,7 +22,6 @@ class Interface
     new_game
     loop do
       help
-       
       puts 'Выберите пункт'
       choice = gets.chomp
       send(COMMANDS[choice])
@@ -29,7 +29,21 @@ class Interface
   end
 
   def play
-
+    puts 'Выберите действие'
+    puts '1. Добавить карту'
+    puts '2. Открыть карты'
+    puts '3. Пропустить'
+    act = gets.chomp
+    case act
+    when '1'
+      give_cards_in_the_game(player)
+      puts "Вы взяли карту ход"
+    when '2'
+      puts "Игру выиграл #{@game.winner}"
+    else
+      puts "Вы пропустили ход"
+    end
+    Diler.can_card
   end
 
   def help

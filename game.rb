@@ -17,17 +17,15 @@ class Game
     @player.take_card(@deck.give_card)
   end
 
-  def make_bet
-
-  end
+  def make_bet; end
 
   def winner
-    if @player.scoring == @dealer.scoring
-      puts "Ничья"
-    elsif @player.scoring > @dealer.scoring
-      puts "Игрок выиграл"
-    else
-      puts "Дилер выиграл"
+    if 22 > @player.scoring &&@player.scoring > @dealer.scoring
+      @player
+    elsif 22 > @dealer.scoring && @dealer.scoring > @player.scoring
+      @dealer
+    elsif @player.scoring == @dealer.scoring
+      nil
     end
   end
 
