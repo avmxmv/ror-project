@@ -13,11 +13,19 @@ class Player
     @cards << card
   end
 
-# подсчёт очков
+  def scoring
+    summ = 0
+    @cards.each do |card|
+      summ += card.value
+    end
+    summ
+  end
 end
 
 class Dealer < Player
-  def can_card?
-    # нужно ли взять карту
+  def can_card
+    if scoring < 17 && @cards.count == 2
+      Game.give_cards_in_the_game(dealer)
+    end
   end
 end

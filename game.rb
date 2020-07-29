@@ -1,7 +1,7 @@
 class Game
   def initialize(name)
     @player = Player.new(name)
-    @dealer = Player.new("Dealer")
+    @dealer = Player.new('Dealer')
   end
 
   def new_game
@@ -21,7 +21,21 @@ class Game
 
   end
 
-# определить победителя
-# отдаватние денег победитель
-# выдача карт в течение игры
+  def winner
+    if @player.scoring == @dealer.scoring
+      puts "Ничья"
+    elsif @player.scoring > @dealer.scoring
+      puts "Игрок выиграл"
+    else
+      puts "Дилер выиграл"
+    end
+  end
+
+  def give_cards_in_the_game(user)
+    if user == 'player'
+      @player.take_card(@deck.give_card)
+    else
+      @dealer.take_card(@deck.give_card)
+    end
+  end
 end
