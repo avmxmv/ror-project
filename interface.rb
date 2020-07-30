@@ -22,8 +22,10 @@ class Interface
   def run
     @game.new_game
     loop do
-      help
       @game.give_cards
+      puts "Ваши очки: #{@game.player.scoring}"
+      puts "Очки дилера: #{@game.dealer.scoring}"
+      help
       puts 'Выберите пункт'
       choice = gets.chomp
       send(COMMANDS[choice])

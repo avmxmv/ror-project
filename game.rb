@@ -4,6 +4,8 @@ require_relative 'interface'
 require_relative 'player'
 
 class Game
+  attr_reader :dealer, :player
+
   def initialize(name)
     @player = Player.new(name)
     @dealer = Player.new('Dealer')
