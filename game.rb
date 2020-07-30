@@ -1,12 +1,16 @@
+require_relative 'card'
+require_relative 'deck'
+require_relative 'interface'
+require_relative 'player'
+
 class Game
   def initialize(name)
     @player = Player.new(name)
     @dealer = Player.new('Dealer')
+    new_game
   end
 
   def new_game
-    @player.cards = []
-    @dealer.cards = []
     @deck = Deck.new
   end
 
@@ -21,9 +25,9 @@ class Game
 
   def winner
     if 22 > @player.scoring &&@player.scoring > @dealer.scoring
-      @player
+      @player.name
     elsif 22 > @dealer.scoring && @dealer.scoring > @player.scoring
-      @dealer
+      @dealer.name
     elsif @player.scoring == @dealer.scoring
       nil
     end
@@ -33,7 +37,9 @@ class Game
     if user == 'player'
       @player.take_card(@deck.give_card)
     else
-      @dealer.take_card(@deck.give_card)
+      if @dealer.scoring < 17 && @dealer.cards.count == 2
+        @dealer.take_card(@deck.give_card)
+      end
     end
   end
 end

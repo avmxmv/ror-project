@@ -1,5 +1,10 @@
+require_relative 'game'
+require_relative 'card'
+require_relative 'deck'
+require_relative 'player'
+
 class Interface
-  attr_reader :game
+  attr_reader :game, :deck
   COMMANDS = { '1' => 'play' }.freeze
 
   def initialize
@@ -14,14 +19,11 @@ class Interface
     name
   end
 
-  def new_game
-    deck = Deck.new
-  end
-
   def run
-    new_game
+    @game.new_game
     loop do
       help
+      @game.give_cards
       puts 'Выберите пункт'
       choice = gets.chomp
       send(COMMANDS[choice])
@@ -36,14 +38,16 @@ class Interface
     act = gets.chomp
     case act
     when '1'
-      give_cards_in_the_game(player)
-      puts "Вы взяли карту ход"
+      @game.give_cards_in_the_game('player')
+      puts "Вы взяли карту"
+      @game.give_cards_in_the_game('dealer')
     when '2'
       puts "Игру выиграл #{@game.winner}"
+      abort
     else
       puts "Вы пропустили ход"
+      @game.give_cards_in_the_game('dealer')
     end
-    Diler.can_card
   end
 
   def help

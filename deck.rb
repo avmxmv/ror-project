@@ -1,4 +1,7 @@
+require_relative 'game'
 require_relative 'card'
+require_relative 'interface'
+require_relative 'player'
 
 class Deck
   attr_accessor :cards

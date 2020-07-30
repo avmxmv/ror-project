@@ -1,3 +1,8 @@
+require_relative 'game'
+require_relative 'card'
+require_relative 'deck'
+require_relative 'interface'
+
 class Player
   attr_reader :name, :cards, :money
 
@@ -22,10 +27,10 @@ class Player
   end
 end
 
-class Dealer < Player
-  def can_card
-    if scoring < 17 && @cards.count == 2
-      Game.give_cards_in_the_game(dealer)
-    end
-  end
-end
+# class Dealer < Player
+#   def can_card
+#     if scoring < 17 && @cards.count == 2
+#       Game.give_cards_in_the_game(dealer)
+#     end
+#   end
+# end
