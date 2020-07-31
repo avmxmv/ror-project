@@ -38,6 +38,10 @@ class Game
       @player
     elsif 22 > @dealer.scoring && @dealer.scoring > @player.scoring
       @dealer
+    elsif 22 > @player.scoring && @dealer.scoring > 21
+      @player
+    elsif 22 > @dealer.scoring && @player.scoring > 21
+      @dealer
     elsif @player.scoring == @dealer.scoring
       nil
     end

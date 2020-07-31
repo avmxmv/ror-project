@@ -46,7 +46,7 @@ class Interface
       flag(@game.give_cards_in_the_game('dealer'))
     elsif act == '2'
       puts "Игру выиграл:"
-      puts @game.winner.name
+      puts @game.winner&.name
       puts "Ваши карты:"
       @game.check_cards(@game.player)
       puts "Карты дилера:"
