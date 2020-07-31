@@ -21,9 +21,11 @@ class Interface
 
   def run
     @game.new_game
+    @game.give_cards
     loop do
-      @game.give_cards
       puts "Ваши очки: #{@game.player.scoring}"
+      puts "Ваши карты:"
+      @game.check_cards(@game.player)
       puts "Очки дилера: #{@game.dealer.scoring}"
       help
       puts 'Выберите пункт'
@@ -38,17 +40,30 @@ class Interface
     puts '2. Открыть карты'
     puts '3. Пропустить'
     act = gets.chomp
-    case act
-    when '1'
+    if act == '1'
       @game.give_cards_in_the_game('player')
       puts "Вы взяли карту"
-      @game.give_cards_in_the_game('dealer')
-    when '2'
-      puts "Игру выиграл #{@game.winner}"
+      flag(@game.give_cards_in_the_game('dealer'))
+    elsif act == '2'
+      puts "Игру выиграл:"
+      puts @game.winner.name
+      puts "Ваши карты:"
+      @game.check_cards(@game.player)
+      puts "Карты дилера:"
+      @game.check_cards(@game.dealer)
       abort
     else
       puts "Вы пропустили ход"
       @game.give_cards_in_the_game('dealer')
+      flag(@game.give_cards_in_the_game('dealer'))
+    end
+  end
+
+  def flag(flag)
+    if flag.nil?
+      puts "Дилер пропустил ход"
+    else
+      puts "Дилер взял карту"
     end
   end
 

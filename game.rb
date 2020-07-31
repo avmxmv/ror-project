@@ -23,13 +23,21 @@ class Game
     @player.take_card(@deck.give_card)
   end
 
+  def check_cards(user)
+    user.cards.each do |card|
+      puts card.rank + card.suit
+    end
+  end
+
   def make_bet; end
 
   def winner
-    if 22 > @player.scoring &&@player.scoring > @dealer.scoring
-      @player.name
+    if 21 < @player.scoring && 21 < @dealer.scoring
+      nil
+    elsif 22 > @player.scoring && @player.scoring > @dealer.scoring
+      @player
     elsif 22 > @dealer.scoring && @dealer.scoring > @player.scoring
-      @dealer.name
+      @dealer
     elsif @player.scoring == @dealer.scoring
       nil
     end
@@ -41,6 +49,8 @@ class Game
     else
       if @dealer.scoring < 17 && @dealer.cards.count == 2
         @dealer.take_card(@deck.give_card)
+      else
+        nil
       end
     end
   end
