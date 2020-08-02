@@ -4,7 +4,8 @@ require_relative 'deck'
 require_relative 'interface'
 
 class Player
-  attr_reader :name, :cards, :money
+  attr_reader :name, :cards
+  attr_accessor :money
 
   DEFAULT_MONEY = 100
 
@@ -20,8 +21,15 @@ class Player
 
   def scoring
     summ = 0
+    kol_a = 0
     @cards.each do |card|
       summ += card.value
+      if card.value == 11
+        kol_a += 1
+      end
+    end
+    if summ > 21 && kol_a != 0
+      summ -= 10
     end
     summ
   end
