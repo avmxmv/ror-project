@@ -4,8 +4,8 @@ require_relative 'deck'
 require_relative 'interface'
 
 class Player
-  attr_reader :name, :cards
-  attr_accessor :money
+  attr_reader :name
+  attr_accessor :money, :cards
 
   DEFAULT_MONEY = 100
 
@@ -28,17 +28,10 @@ class Player
         kol_a += 1
       end
     end
-    if summ > 21 && kol_a != 0
+    while summ > 21 && kol_a != 0
       summ -= 10
+      kol_a -= 1
     end
     summ
   end
 end
-
-# class Dealer < Player
-#   def can_card
-#     if scoring < 17 && @cards.count == 2
-#       Game.give_cards_in_the_game(dealer)
-#     end
-#   end
-# end

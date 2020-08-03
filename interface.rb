@@ -5,7 +5,6 @@ require_relative 'player'
 
 class Interface
   attr_reader :game, :deck
-  COMMANDS = { '1' => 'play' }.freeze
 
   def initialize
     @game = Game.new(introduce)
@@ -32,10 +31,7 @@ class Interface
       puts "Очки дилера: #{@game.dealer.scoring}"
       puts "Карты дилера:"
       @game.check_cards(@game.player, 2)
-      help
-      puts 'Выберите пункт'
-      choice = gets.chomp
-      send(COMMANDS[choice])
+      play
     end
   end
 
@@ -55,17 +51,25 @@ class Interface
     elsif act == '2'
       puts "Игру выиграл:"
       puts @game.winner&.name
+      @game.gain(@game.winner)
       puts "Ваши карты:"
       @game.check_cards(@game.player, 1)
       puts "Карты дилера:"
       @game.check_cards(@game.dealer, 1)
       puts "Ваш баланс:"
       puts @game.player.money
-      puts "Вы хотите начать новую игру?"
-      answer = gets.chomp
-      if answer == 'да'
-        Interface.run
+      if @game.player.money > 20
+        puts "Вы хотите начать новую игру?"
+        answer = gets.chomp
+        if answer == 'да'
+          @game.dealer.cards = []
+          @game.player.cards = []
+          run
+        else
+          abort
+        end
       else
+        puts "У вас недостаточно денег чтобы начать новую игру, зарабатывайте и приходите к нам ещё, удачи!!!"
         abort
       end
     else
@@ -81,9 +85,5 @@ class Interface
     else
       puts "Дилер взял карту"
     end
-  end
-
-  def help
-    puts '1. Сделать ход'
   end
 end

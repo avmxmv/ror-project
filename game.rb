@@ -40,26 +40,27 @@ class Game
     @dealer.money -= 10
   end
 
+  def gain(user)
+    if user
+      user.money += 20
+    else
+      @player.money += 10
+      @dealer.money += 10
+    end
+  end
+
   def winner
     if 21 < @player.scoring && 21 < @dealer.scoring
-      @player.money += 10
-      @dealer.money += 10
       nil
     elsif 22 > @player.scoring && @player.scoring > @dealer.scoring
-      @player.money += 20
       @player
     elsif 22 > @dealer.scoring && @dealer.scoring > @player.scoring
-      @dealer.money += 20
       @dealer
     elsif 22 > @player.scoring && @dealer.scoring > 21
-      @player.money += 20
       @player
     elsif 22 > @dealer.scoring && @player.scoring > 21
-      @dealer.money += 20
       @dealer
     elsif @player.scoring == @dealer.scoring
-      @player.money += 10
-      @dealer.money += 10
       nil
     end
   end
