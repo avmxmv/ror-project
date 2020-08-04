@@ -50,8 +50,8 @@ class Game
   end
 
   def clear
-    @game.dealer.cards = []
-    @game.player.cards = []
+    @dealer.cards = []
+    @player.cards = []
   end
 
   def winner
