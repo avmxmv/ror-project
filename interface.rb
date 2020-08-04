@@ -49,10 +49,16 @@ class Interface
       flag(@game.give_cards_in_the_game('dealer'))
     elsif act == '2'
       puts "Игру выиграл:"
-      puts @game.winner&.name
+      if @game.winner&.name
+        puts @game.winner&.name
+      else
+        puts "Ничья"
+      end
       @game.gain(@game.winner)
+      puts "Ваши очки: #{@game.player.scoring}"
       puts "Ваши карты:"
       @game.check_cards(@game.player, 1)
+      puts "Очки дилера: #{@game.dealer.scoring}"
       puts "Карты дилера:"
       @game.check_cards(@game.dealer, 1)
       puts "Ваш баланс:"
