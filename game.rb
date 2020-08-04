@@ -49,19 +49,20 @@ class Game
     end
   end
 
+  def clear
+    @game.dealer.cards = []
+    @game.player.cards = []
+  end
+
   def winner
-    if 21 < @player.scoring && 21 < @dealer.scoring
+    if (@player.scoring > 21 && @dealer.scoring > 21) || @player.scoring == @dealer.scoring # Проверяем не вышли ли оба игрока за грань, ну или их очки равны (то ничья)
       nil
-    elsif 22 > @player.scoring && @player.scoring > @dealer.scoring
-      @player
-    elsif 22 > @dealer.scoring && @dealer.scoring > @player.scoring
+    elsif @player.scoring > 21 # Если у игрока очков больше 21, то выиграл дилер
       @dealer
-    elsif 22 > @player.scoring && @dealer.scoring > 21
+    elsif @dealer.scoring > 21 # Если у дилера очков больше 21, то выиграл игрок
       @player
-    elsif 22 > @dealer.scoring && @player.scoring > 21
-      @dealer
-    elsif @player.scoring == @dealer.scoring
-      nil
+    else
+      [@player, @dealer].max_by(&:scoring) # Иначе возвращаем пользователя у кого больше всего scoring
     end
   end
 

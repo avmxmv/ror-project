@@ -28,7 +28,6 @@ class Interface
       @game.check_cards(@game.player, 1)
       puts "Ваш баланс:"
       puts @game.player.money
-      puts "Очки дилера: #{@game.dealer.scoring}"
       puts "Карты дилера:"
       @game.check_cards(@game.player, 2)
       play
@@ -62,8 +61,7 @@ class Interface
         puts "Вы хотите начать новую игру?"
         answer = gets.chomp
         if answer == 'да'
-          @game.dealer.cards = []
-          @game.player.cards = []
+          @game.clear
           run
         else
           abort

@@ -8,4 +8,8 @@ class Card
     @suit = suit
     @value = value
   end
+
+  def ace?
+    @rank == 'A'
+  end
 end

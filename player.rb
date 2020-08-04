@@ -20,18 +20,10 @@ class Player
   end
 
   def scoring
-    summ = 0
-    kol_a = 0
-    @cards.each do |card|
-      summ += card.value
-      if card.value == 11
-        kol_a += 1
-      end
+    total = @cards.map(&:value).sum
+    @cards.select(&:ace?).each do |card|
+      total > 21 ? total -= 10 : break
     end
-    while summ > 21 && kol_a != 0
-      summ -= 10
-      kol_a -= 1
-    end
-    summ
+    total
   end
 end
